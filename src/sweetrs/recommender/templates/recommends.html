@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        tr.big-diff td {
+            background-color: #ffd4d4
+        }
+    table {
+        width:90%;
+        border-top:1px solid #e5eff8;
+        border-right:1px solid #e5eff8;
+        margin:1em auto;
+        border-collapse:collapse;
+    }
+    td {
+        color:#678197;
+        border-bottom:1px solid #e5eff8;
+        border-left:1px solid #e5eff8;
+        padding:.3em 1em;
+        text-align:center;
+        font-size: 18px;
+    }
+    .pager {
+        text-align: center;
+    }
+    .pager a {
+        font-weight: bold;
+        cursor: pointer;
+    }
+    </style>
+    {% load thumbnail %}
+    <h3>Users</h3>
+    Your tau correlation coefficients with other sweetrs users. I will give some details later, right now you can read
+    something on <a href="http://en.wikipedia.org/wiki/Pearson_correlation">wikipedia</a>.
+    <table id="users">
+    <thead>
+    <tr>
+        <th>User</th>
+        <th>Your correlation with this user</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in users_with_corr %}
+        <tr class="">
+            <td><img src="https://graph.facebook.com/{{ item.get_profile.uid }}/picture"/></td>
+            <td>{{ item.tau|floatformat:4 }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <div id="users-pager" class="pager">
+        <form>
+            <a class="first">&lt;&lt;</a>
+            <a class="prev">&lt;</a>
+            <input type="text" class="pagedisplay"/>
+            <a class="next">&gt;</a>
+            <a class="last">&gt;&gt;</a>
+            <select class="pagesize">
+                <option selected="selected"  value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option  value="40">40</option>
+            </select>
+        </form>
+    </div>
+    <div style="clear: both;"><br /></div>
+    <h3>Ratings</h3>
+    Currently I predict rating as weighted sum of other users ratings, where weights are just correlation coefficients (normalized).
+    More details will be shown later.<br />
+    Red background is just for noticing big mistake made by algorithm i.e. if predicted value differates "too much" with your rank.
+    <table id="products">
+    <thead>
+    <tr>
+        <th>Product</th>
+        <th>Your rate</th>
+        <th>Prediction</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in products_with_marks %}
+        <tr class="{% if item.difference > 1.5 %}big-diff{% endif %}">
+            <td><img width="50" height="50" src="{% thumbnail item.photo 50x50 quality=75 crop %}" alt="{{ item.name }}" /></td>
+            <td>{{ item.rating }}</td>
+            <td>{{ item.predict|floatformat }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    <div id="products-pager" class="pager">
+        <form>
+            <a class="first">&lt;&lt;</a>
+            <a class="prev">&lt;</a>
+            <input type="text" class="pagedisplay"/>
+            <a class="next">&gt;</a>
+            <a class="last">&gt;&gt;</a>
+            <select class="pagesize">
+                <option selected="selected"  value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option  value="40">40</option>
+            </select>
+        </form>
+    </div>
+    <div style="clear: both;"><br /></div>
+    
+{% endblock %}
+{% block js %}
+$(document).ready(function() {
+    $("#products").tablesorter().tablesorterPager({positionFixed: false, container: $("#products-pager")});
+    $("#users").tablesorter().tablesorterPager({positionFixed: false, container: $("#users-pager")});
+});
+{% endblock %}

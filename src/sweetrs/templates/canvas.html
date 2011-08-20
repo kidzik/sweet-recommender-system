@@ -1,0 +1,128 @@
+<html><head>
+
+<style>
+    .clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+    }
+    h1 {font-size: 15pt; text-transform:uppercase}
+    h2 {font-size: 13pt; color: #333;}
+    h3 {font-size: 11pt; color: #444;}
+    h4 {font-size: 9pt; color: #555;}
+
+    .clearfix {
+        display: inline-block;
+    }
+
+    html[xmlns] .clearfix {
+        display: block;
+    }
+
+    * html .clearfix {
+        height: 1%;
+    }
+    body {margin: 0; padding: 0; }
+    * {font-family: Verdana; font-size: 10pt; color: #555;}
+
+    .product-list-item {
+        padding: 3px;
+        padding-bottom: 8px;
+        border-bottom: 1px #6a5acd dotted;
+        clear: both;
+    }
+    .product-list-item img {
+        float: left;
+    }
+    .product-list-item-info {
+        float: left;
+        width: 400px;
+        margin-left: 30px;
+    }
+    .product-list-item-info h3 {
+        font-size: 11pt;
+        font-weight: bold;
+    }
+    .product-list-item-info-label {
+        font-weight: bold;
+    }
+    .product-list-item-description {
+        margin-top: 5px;
+    }
+    #header {
+        float: left;
+        width: 200px;
+    }
+    #site {
+        width: 810px;
+        height: 600px;
+    }
+    .bar {
+        width: 500px;
+        height: 20px;
+        background-color: #ffcc99;
+        float: left;
+        border: 1px solid #777777;
+        margin-bottom: 10px;
+    }
+    .checked {
+        height: 20px;
+        background-color: #339900;
+    }
+    #basic-modal-content {display:none;}
+
+/* jqModal base Styling courtesy of;
+  Brice Burgess <bhb@iceburg.net> */
+
+/* The Window's CSS z-index value is respected (takes priority). If none is supplied,
+  the Window's z-index value will be set to 3000 by default (in jqModal.js). You
+  can change this value by either;
+    a) supplying one via CSS
+    b) passing the "zIndex" parameter. E.g.  (window).jqm({zIndex: 500}); */
+
+.jqmWindow {
+    display: none;
+
+    position: fixed;
+    top: 17%;
+    left: 50%;
+
+    margin-left: -300px;
+    width: 600px;
+
+    background-color: #EEE;
+    color: #333;
+    border: 1px solid black;
+    padding: 12px;
+}
+
+.jqmOverlay { background-color: #000; }
+
+/* Fixed posistioning emulation for IE6
+     Star selector used to hide definition from browsers other than IE6
+     For valid CSS, use a conditional include instead */
+* html .jqmWindow {
+     position: absolute;
+     top: expression((document.documentElement.scrollTop || document.body.scrollTop) + Math.round(17 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px');
+}
+
+</style></head><body>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery/jquery.simplemodal.1.4.1.min.js"></script>
+<div id="fb-root">
+    <script src="http://connect.facebook.net/en_US/all.js#xfbml=1" type="text/javascript"></script>
+</div>
+<script>
+  FB.init({
+    appId  : '199954626696783',
+    status : true, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true  // parse XFBML
+  });
+</script>
+{% block content %}
+
+{% endblock %}</body></html>

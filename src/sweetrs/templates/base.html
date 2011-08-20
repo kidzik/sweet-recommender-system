@@ -1,0 +1,183 @@
+<style>
+    .clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+    }
+    h1 {font-size: 15pt; text-transform:uppercase}
+    h2 {font-size: 13pt; color: #333;}
+    h3 {font-size: 11pt; color: #444;}
+    h4 {font-size: 9pt; color: #555;}
+
+    .clearfix {
+        display: inline-block;
+    }
+
+    html[xmlns] .clearfix {
+        display: block;
+    }
+
+    * html .clearfix {
+        height: 1%;
+    }
+    body {margin: 0; padding: 0; background-color: #f5f5f5; }
+    body {
+        background: url("static/gfx/bg.gif") repeat;
+    }
+    * {font-family: Verdana; font-size: 10pt; color: #555;}
+    #menu {
+        display: block;
+        width: 200px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #menu li {
+        list-style: none;
+        background-color: #DDE5FF;
+        padding: 0;
+        margin: 0;
+        margin-top: 4px;
+        padding-left: 6px;
+    }
+    #menu li.active {
+        background-color: #BCF;
+    }
+    #menu li a {
+        text-decoration: none;
+        color: #00153b;
+        display: block;
+        padding: 2px;
+    }
+    #content-container {
+        background-color: #BCF;
+        float: left;
+        width: 600px;
+        padding: 5px;
+    }
+    #content {
+        background-color: #ffffff;
+        padding: 5px;
+        min-height: 400px;
+    }
+
+    .product-list-item {
+        padding: 3px;
+        padding-bottom: 8px;
+        border-bottom: 1px #6a5acd dotted;
+        clear: both;
+    }
+    .product-list-item img {
+        float: left;
+    }
+    .product-list-item-info {
+        float: left;
+        width: 400px;
+        margin-left: 30px;
+    }
+    .product-list-item-info h3 {
+        font-size: 11pt;
+        font-weight: bold;
+    }
+    .product-list-item-info-label {
+        font-weight: bold;
+    }
+    .product-list-item-description {
+        margin-top: 5px;
+    }
+    #header {
+        float: left;
+        width: 200px;
+    }
+    #site {
+        width: 810px;
+        height: 600px;
+    }
+    .bar {
+        width: 500px;
+        height: 20px;
+        background-color: #ffcc99;
+        float: left;
+        border: 1px solid #777777;
+        margin-bottom: 10px;
+    }
+    .checked {
+        height: 20px;
+        background-color: #339900;
+    }
+
+</style>
+<html>
+<head>
+<title>Sweet Recommender System</title>
+<!--meta property="fb:app_id" content="199954626696783"/-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-5685649-17']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+<div id="site">
+<div id="header">
+    <div style="padding: 3px; margin-bottom: 10px;">
+        <h1>Sweet recommender system</h1>
+        Contribute to scientific project and find out which sweets you like.
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://tablesorter.com/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="http://tablesorter.com/addons/pager/jquery.tablesorter.pager.js"></script>
+
+    <ul id="menu">
+        {% load active %}
+        <li class="{% active request "^/$" %}"><a href="{% url about_us %}">About the project</a></li>
+
+        <li class="{% active request "^/srs/reviews/" %}"><a href="{% url product_reviews %}">Review</a></li>
+        <li class="{% active request "^/srs/results/" %}"><a style="font-weight: bold" href="{% url product_recommends %}">Recommendations!</a></li>
+        <!--li class="{% active request "^/friends/" %}"><a href="">Friends' choices</a></li-->
+        <li class="{% active request "^/srs/add/" %}"><a href="{% url product_add %}">Provide some sweets</a></li>
+        <li class="{% active request "^/faq/" %}"><a href="{% url faq %}">FAQ</a></li>
+
+	{% comment %}
+        {% if request.user.is_anonymous %}
+            <li style="padding: 0px; background-color: none; text-align: center;">{% load socialregistration_tags %}
+            <form class="connect-button" method="post" action="{% if logged_in %}{% url facebook_connect %}{% else %}{% url facebook_login %}{% endif %}">
+            {% social_csrf_token %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}" />
+            {% endif %}
+            <input type="image" onclick="facebookConnect(this.form);return false;" src="{{ MEDIA_URL }}gfx/fb-connect.png" />
+            </form>
+            </li>
+        {% else %}
+            <li class="{% active request "^/logout/" %}"><a href="{% url social_logout %}">Logout</a></li>
+        {% endif %}
+	{% endcomment %}
+    </ul>
+</div>
+<div id="content-container">
+    <div id="content">
+{% block content %}
+
+{% endblock %}
+    </div>
+</div>
+</div>
+<script language="javascript">
+{% block js %}
+
+{% endblock %}
+</script>
+</body>
+</html>

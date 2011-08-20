@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Rate sweets</h2>
+    Please give a mark on the 1-5 scale where:
+    <ul>
+        <li>1 means very poor, "I don't like it",</li>
+        <li>5 means excelent, "I'm lovin' it".</li>
+    </ul>
+    If you haven't tried given product just mark it so.
+    Then the algorithm will know if it should be taken into account during recommendation process.
+    <h3>Progress <span id="rated">{{ rated }}</span> / <span id="all">{{ all }}</span> already rated</h3>
+    <div class="clearfix">
+    <div class="bar"><div id="bar" class="checked" style="width:{{ ratingbar }}px;"></div></div>
+
+    <div id="items">
+    {% for item in products %}
+        {% include "include/product.html" %}
+    {% empty %}
+        You have already rated all sweets. Thanks! Now you can check recommends!
+    {% endfor %}
+    </div>
+
+{% endblock %}
+{% block js %}
+updateButtons = function() {
+$("button").click(function () {
+        s = $(this).attr('id').split("-");
+        id = s[0];
+        val = s[1];
+        $.post("/srs/rate/", { id: id, val: val },function(data) {
+            $("#items").append(data);
+            updateButtons();
+        });
+        $("#item-" + id).hide("slow");
+        rated = parseInt($("#rated").html()) + 1;
+        all =  $("#all").html();
+        $("#rated").html(rated);
+        $("#bar").css('width', rated*500/all + "px");
+});
+}
+updateButtons();
+{% endblock %}

@@ -1,0 +1,19 @@
+{% load thumbnail %}
+        <div id="item-{{ item.id }}" class="product-list-item clearfix">
+            <img src="{% thumbnail item.photo 150x150 quality=75 crop %}" />
+            <div class="product-list-item-info">
+                <h3>{{ item.name }}</h3>
+                <div><span class="product-list-item-info-label">Rating:</span><br />
+                <button id="{{ item.id }}-1" value="1">1</button>
+                <button id="{{ item.id }}-2" value="2">2</button>
+                <button id="{{ item.id }}-3" value="3">3</button>
+                <button id="{{ item.id }}-4" value="4">4</button>
+                <button id="{{ item.id }}-5" value="5">5</button>
+                <button id="{{ item.id }}-0" value="null">Never tried</button>
+                </div>
+                <div class="product-list-item-description">
+                <!--span class="product-list-item-info-label">Overall:</span> ?<br /-->
+
+                </div>
+            </div>
+        </div>
