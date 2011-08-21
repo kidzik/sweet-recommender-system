@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Django settings for sweetrs project.
 from os import path
 PROJECT_PATH = path.realpath(path.dirname(__file__))
@@ -121,3 +122,5 @@ try:
     from sweetrs.localsettings import *
 except ImportError:
     pass
+=======
+>>>>>>> e91560f07541ac986c93362ab5db7fbde28de9ae
