@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load thumbnail %}
+    <h3>Provide email</h3>
+	In order to see results please provide e-mail or secret key received by e-mail
+	<form method="POST">
+    <div class="fieldWrapper">
+        {{ form.cc_myself.errors }}
+        <label for="id_email">Email</label>
+        {{ form.email }}
+    </div>
+    <input type="submit" />
+
+
+    <div class="fieldWrapper">
+        {{ form.cc_myself.errors }}
+        <label for="id_secret">Secret</label>
+        {{ form.secret }}
+    </div>
+    <input type="submit" />
+	</form>
+{% endblock %}
