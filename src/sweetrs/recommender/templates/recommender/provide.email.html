@@ -2,7 +2,8 @@
 {% block content %}
     {% load thumbnail %}
     <h3>{% trans "Provide email" %}</h3>
-	<p>{% trans "In order to see results please provide e-mail or secret key received by e-mail" %}</p>
+	<p>{% trans "In order to see results please provide e-mail or secret key received by e-mail." %}</p>
+	<p>{% trans "Your e-mail is needed only for ensuring that you are serious person. :)" %}</p>
 	<form method="POST">{% csrf_token %}
 	<div>
     <div class="fieldWrapper">

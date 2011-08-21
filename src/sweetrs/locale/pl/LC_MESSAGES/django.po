@@ -412,3 +412,5 @@ msgstr ""
 msgid "Add"
 msgstr "Dodaj"
 
+msgid "Your e-mail is needed only for ensuring that you are serious person. :)"
+msgstr "Twój e-mail jest potrzebny tylko po to by zagwarantować, że jesteś poważną osobą. :)"
