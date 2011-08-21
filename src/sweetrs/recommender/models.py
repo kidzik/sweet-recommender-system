@@ -21,4 +21,4 @@ class Rating(models.Model):
     user = models.ForeignKey(User)
     value = models.IntegerField(blank = True,
                                null = True,
-                               verbose_name = _(u'Ocena produktu'))
+                               verbose_name = _(u'Rating'))

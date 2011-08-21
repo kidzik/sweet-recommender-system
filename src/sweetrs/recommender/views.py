@@ -6,24 +6,25 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
-from sweetrs.recommender.forms import ProductForm
 from sweetrs.recommender.models import Product
-from recommender.models import Rating
+from sweetrs.recommender.models import Rating
 from django.views.decorators.csrf import csrf_exempt                                          
+from django.shortcuts import redirect 
+from sweetrs.recommender.forms import AccessForm
+from sweetrs.recommender.forms import ProductForm
+from django.core.mail import send_mail
 
 PRODUCTS_ON_SITE = 1
 
-from django.views.decorators.csrf import csrf_exempt
-
 @csrf_exempt
 def facebook_intro(request):
-    return render_to_response('intro.html',
+    return render_to_response('recommender/intro.html',
         context_instance=RequestContext(request, {
         }
     ))
 
 @csrf_exempt
-def product_reviews(request, template_path='products.html'):
+def product_reviews(request, template_path='recommender/products.html'):
     """ list products """
 
     products = Product.objects.all()
@@ -64,6 +65,7 @@ def vector_corelation_tau(v1,v2):
         val2 = v2.get(k,None)
         if val2 == None:
             continue
+
         val2 = val2 - 3
         n = n+1
         if val1 * val2 > 0:
@@ -78,6 +80,7 @@ def vector_corelation_tau(v1,v2):
 def vector_corelation_pearson(v1,v2):
     tau = 0
     n = 0
+
     stdev1 = 0
     stdev2 = 0
 
@@ -94,6 +97,8 @@ def vector_corelation_pearson(v1,v2):
         stdev2 += val2 * val2
     if n==0:
         return None
+    if stdev1==0 or stdev2==0:
+        return 1
 
     return float(tau) / (math.sqrt(stdev1/float(n)) * math.sqrt(stdev2/float(n)) * float(n))
 
@@ -114,15 +119,41 @@ def predict_rating(product, vector_corr):
 
     return None
 
-def product_recommends(request, template_path='recommends.html'):
+def product_recommends_provide_email(request):
+    
+    if request.method == 'POST': # If the form has been submitted...
+        form = AccessForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            if form.cleaned_data['secret']:
+                secret = form.cleaned_data['secret']
+                user = User.objects.get(username=secret)
+                login(user)
+            else:
+                email = form.cleaned_data['email']
+                request.user.email = email
+                request.user.save()
+                
+                send_mail('sweetrs secret key', 'Your key for checking results is ' + request.user.username, 'admin@sweetrs.org',
+                    [email], fail_silently=True)
+
+            return redirect('product_recommends') # Redirect after POST
+    else:
+        form = AccessForm() # An unbound form
+    
+    return render_to_response('recommender/provide.email.html',
+        context_instance=RequestContext(request, {'form': form}))
+
+def product_recommends(request, template_path='recommender/recommends.html'):
     products = Product.objects.all()
 
     if request.user.is_anonymous():
-        return render_to_response('recommends.html',
-            context_instance=RequestContext(request, {}))
+        return redirect('product_reviews')
 
+    if request.user.email.split('@')[1] == "dummy.sweetrs.org":
+        return redirect('product_recommends_provide_email')
+ 
     # find similar users:
-    users = User.objects.all().exclude(id=request.user.id).select_related('facebookprofile')
+    users = User.objects.all().exclude(id=request.user.id)
     v1 = get_ratings_vector(request.user)
 
 
@@ -184,7 +215,7 @@ def product_add(request):
         # formularz
         form = ProductForm()
 
-    return render_to_response('product.add.html',
+    return render_to_response('recommender/product.add.html',
         context_instance=RequestContext(request, {"form": form}))
 
 @csrf_exempt

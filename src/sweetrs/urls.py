@@ -22,6 +22,7 @@ urlpatterns = patterns('',
 #    (r'^social/', include('sweetrs.socialregistration.urls')),
 
     (r'^$', 'sweetrs.views.about', {} ,'about_us'),
+    (r'^logout/$', 'sweetrs.views.logout', {} ,'logout'),
 )
 urlpatterns += patterns('django.views.generic.simple',
     (r'^faq/$', 'direct_to_template', {'template': 'flatpages/faq.html'}, 'faq'),

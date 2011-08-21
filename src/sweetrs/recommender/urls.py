@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     (r'^results/$', 'sweetrs.recommender.views.product_recommends', {} ,'product_recommends'),
     (r'^add/$', 'sweetrs.recommender.views.product_add', {} ,'product_add'),
     (r'^rate/$', 'sweetrs.recommender.views.product_rate', {} ,'product_rate'),
+    (r'^email/$', 'sweetrs.recommender.views.product_recommends_provide_email', {} ,'product_recommends_provide_email'),
+    
 #    (r'^canvas/$', 'sweetrs.recommender.views.facebook_intro', {}, 'facebook_intro'),
     (r'^canvas/$', 'sweetrs.recommender.views.product_reviews', {
         'template_path': "facebook.html",

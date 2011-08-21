@@ -1,47 +1,40 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load i18n %}
 {% block content %}
-<h2>Why sweets?</h2>
+<h2>{% trans "Why sweets?" %}</h2>
 <ol>
-    <li>everyone have ever eaten some already,</li>
-    <li>there are lots of them, but the set can be shrinked to just for instance candy bars without loosing property 1,</li>
-    <li>it's obvious that our friends have huge impact on our political beliefs - it's nice to check if they
-    influence also minor decisions,</li>
-    <li>it's quite easy to distinguish whether we like given candy or not,</li>
-    <li>as long as candies are not considered to be the most important thing on the planet, it won't shift the focus from
-    making great algorithm to the product itself,</li>
+    <li>{% trans "everyone have already eaten some," %}</li>
+    <li>{% trans "there are lots of them, but the set can be easly shrinked," %}</li>
+    <li>{% trans "it's quite easy to distinguish whether we like given candy or not," %}</li>
+    <li>{% trans "as long as candies are not considered to be the most important thing on the planet, it won't shift the focus from making great algorithm to the product itself," %}</li>
 </ol>
 </p>
-    <h2>How does it work?</h2>
+    <h2>{% trans "How does it work?" %}</h2>
     <p>
-        I have populated database of candies with some "international" once. People who had joined this project (just by
-        clicking 'facebook login') review those items on the 1-5 grade. As long as they have joined project via facebook
-        system has also information about their friends connections.
-        The algorithm which I'm going to build as my master thesis is going to get all this data and as an result shows
-        sweets that you haven't ever tried and that it thinks you are going to like them.
+        {% blocktrans %}
+        I have populated database of candies with some "international" ones. People who had joined this project (just by
+        clicking 'Review') review those items on the 1-5 grade. 
+        The algorithm which I'm going to build as my master thesis gathers all data and recommends you
+        sweets that you haven't ever tried and that you would like.
+        {% endblocktrans %}
     </p>
-    <h2>Sounds great to me, how can I contribute?</h2>
+    <h2>{% trans "Sounds great to me, how can I contribute?" %}</h2>
     <p>
-        Just login via facebook, review some products, check your recommendations and have fun with exploring new candies :)
+        {% trans "Just rate some products, check your recommendations and have fun with exploring new candies :)"  %}
     </p>
-    <h2>I love this project - could I help more somehow?</h2>
+    <h2>{% trans "I love this project - could I help more somehow?" %}</h2>
     <p>
-        Sure. Just contact me and tell something about your background, ie. are you mathematician, statistician, software
-        engineer, candy lover, taxi driver or graphic designer.
+        {% trans "Sure. Just contact me and tell something about your background, ie. are you mathematician, statistician, software engineer, candy lover, taxi driver or graphic designer." %}
     </p>
-    <h2>Is it going to be used in advertisement?</h2>
+    <h2>{% trans "Is it innovative anyhow?" %}</h2>
     <p>
-        The idea is already used by companies like amazon.<br />
+        {% trans "The idea is already used by many companies, however there are not many open-source approaches." %}<br />
     </p>
-    <h2>So why should one bother about creating the new one?</h2>
+    <h2>{% trans "Why should one bother about creating good recommender system?" %}</h2>
     <p>
-        Because I have to create something for my master thesis :). There are lots of recommender systems but there are
-        also three issues:
+        {% trans "Because I have to create something for my master thesis :). There are some recommender systems but there are also some issues:" %}
         <ol>
-            <li>most of them are closed sourced so one can't check why he was given such recommendations (it may lead
-            to abuses),</li>
-            <li>there is always problem with getting relevant data (there are not many institutions that provide it),</li>
-            <li>because of facebook there appeared new approach lately, concerning social connections, which hasn't
-            been studied deeply yet.</li>
+            <li>{% trans "most of them are closed sourced so one can't check why he was given such recommendations (it may lead to abuses)," %}</li>
+            <li>{% trans "there is always problem with getting relevant data (there are not many institutions that provide it for free)," %}</li>
         </ol>
     </p>
 {% endblock %}

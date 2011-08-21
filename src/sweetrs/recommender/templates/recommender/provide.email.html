@@ -1,22 +1,27 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load i18n %}
 {% block content %}
     {% load thumbnail %}
-    <h3>Provide email</h3>
-	In order to see results please provide e-mail or secret key received by e-mail
-	<form method="POST">
+    <h3>{% trans "Provide email" %}</h3>
+	<p>{% trans "In order to see results please provide e-mail or secret key received by e-mail" %}</p>
+	<form method="POST">{% csrf_token %}
+	<div>
     <div class="fieldWrapper">
-        {{ form.cc_myself.errors }}
-        <label for="id_email">Email</label>
+        {{ form.email.errors }}
+        <label for="id_email">{% trans "Email" %}</label>
         {{ form.email }}
     </div>
     <input type="submit" />
+    </div>
+	<hr />
+    <p>{% trans "If you have already finished once, you can use the key (received by e-mail) to find results" %}</p>
 
-
+	<div>
     <div class="fieldWrapper">
-        {{ form.cc_myself.errors }}
-        <label for="id_secret">Secret</label>
+        {{ form.secret.errors }}
+        <label for="id_secret">{% trans "Secret" %}</label>
         {{ form.secret }}
     </div>
     <input type="submit" />
+    </div>
 	</form>
 {% endblock %}

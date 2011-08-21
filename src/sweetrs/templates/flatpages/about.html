@@ -1,45 +1,42 @@
-﻿{% extends "base.html" %}
+﻿{% extends "base.html" %}{% load i18n %}
 {% block content %}
     <div style="text-align: right;"><i>
-“C is for cookie, it's good enough for me,<br />oh cookie cookie cookie starts with C.” </i><br />
-Cookie monster
+“{% trans "C is for cookie, it's good enough for me,<br />oh cookie cookie cookie starts with C." %}” </i><br />
+{% trans "Cookie monster" %}
 </div>
-    <p>Hello,</p>
-<p>If you have found this website you are probably in my social circle. That's great. You might even know that my name is
-<a href="http://students.mimuw.edu.pl/~lk234151/">Łukasz Kidziński</a> and I'm a wannabe computer scientist from Poland.
-I'm working on my master's thesis right now which is the recommender system.
+    <p>{% trans "Hello" %},</p>
+<p>{% trans "If you have found this website you are probably in my social circle. That's great. You might even know that my name is" %}
+<a href="http://students.mimuw.edu.pl/~lk234151/">Łukasz Kidziński</a> {% blocktrans %}and I'm a wannabe computer scientist from Poland.
+I'm working on my master's thesis right now which is the recommender system.{% endblocktrans %}
 
-    <h2>Contribute to scientific project - not money, just 5 minutes</h2>
-    All I need are some ratings of sweets you've ever eaten.
 
-    <h2>3 easy steps to help me:</h2>
-    <h3>1. Login with facebook</h3>
-    only this way of logging in is already provided because in order to generate better results algorithm uses your facebook
-    friends' choices.
-    <h3>2. Rate sweets</h3>
-    try to provide ratings for as much sweets as you can. If you haven't eaten given sweet then mark it that way because
-    this information is also important.
-    <h3>3. Enjoy recommends</h3>
-    find out which new sweets you'd like. Enjoy them or not and give me feedback afterwards :)
+    <h2>{% trans "Contribute to scientific project - all I need is your 5 minutes" %}</h2>
+    {% trans "On this website I ask for your ratings of popular sweets. Then my systems predicts which sweets you would prefer from those which you don't know!" %}
+    <div style="text-align: center"><a style="color: #000000; padding: 5px; display: inline-block; background-color: #dddddd; border: 1px solid #444444; margin-top: 5px; text-decoration: none; font-weight: bold; font-size: 30px;" href="{% url product_reviews %}">{% trans "START" %}</a></div>
 
-    <h2>What do I need?</h2>
-    In order to build reliable system I need at least:
-    500 users and about 10000 marks
+    <h2>{% trans "2 easy steps to help me:" %}</h2>
+    <h3>{% trans "Rate sweets" %}</h3>
+    {% trans "try to provide ratings for as much sweets as you can. If you haven't eaten given sweet then mark it that way because this information is also important." %}
+    <h3>{% trans "Enjoy recommends" %}</h3>
+    {% trans "find out which new sweets you'd like. Enjoy them or not and give me feedback afterwards :)" %}
 
-    <h2>So far...</h2>
-    <strong>{{ users }} / 500</strong> users contributed<br />
+    <h2>{% trans "What do I need?" %}</h2>
+    {% trans "In order to build reliable system I need at least:<br />500 users and about 10000 marks" %}
+
+    <h2>{% trans "So far..." %}</h2>
+    <strong>{{ users }} / 500</strong> {% trans "users contributed" %}<br />
     <div class="clearfix">
     <div class="bar"><div class="checked" style="width:{{ usersbar }}px;"></div></div>
     <br />
-    with <strong>{{ ratings }} / 10000</strong> ratings provided<br />
+    <strong>{{ ratings }} / 10000</strong> {% trans "ratings provided" %}<br />
     <div class="clearfix">
     <div class="bar"><div class="checked" style="width:{{ ratingsbar }}px;"></div></div>
 
-    <h2>Still not sure?</h2>
-    Read more in <a href="{% url faq %}">FAQ</a> or contact <a href="http://students.mimuw.edu.pl/~lk234151/">me</a>.
+    <h2>{% trans "Still not sure?" %}</h2>
+    {% trans "Read more in" %} <a href="{% url faq %}">FAQ</a> {% trans "or contact" %} <a href="http://students.mimuw.edu.pl/~lk234151/">{% trans "me" %}</a>.
         
-    <h2>Do you like it? Click "LIKE"!</h2>
-    It will help me in promoting this application.<br /><br />
+    <h2>{% trans "Do you like it? Click 'LIKE'!" %}</h2>
+    {% trans "It will help me in promoting this application." %}<br /><br />
     <fb:like-box href="http://www.facebook.com/apps/application.php?id=199954626696783" width="292" show_faces="true" stream="false" header="false"></fb:like-box>
     </div>
 {% endblock %}

@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'sweetrs',                      # Or path to database file if using sqlite3.
+        'NAME': 'sweetrs.db',                      # Or path to database file if using sqlite3.
         'USER': 'sweetrs',                      # Not used with sqlite3.
         'PASSWORD': 'sweetrs',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -70,12 +70,13 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'sweetrs.localeurl.middleware.LocaleURLMiddleware',
 #    'socialregistration.middleware.FacebookMiddleware',
 )
 
@@ -98,6 +99,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'sweetrs.recommender',
     'sweetrs.sorl.thumbnail',
+    'sweetrs.localeurl',
 )
 
 try:

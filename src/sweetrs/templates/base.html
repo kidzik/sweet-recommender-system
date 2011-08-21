@@ -1,4 +1,4 @@
-<style>
+{% load i18n %}<style>
     .clearfix:after {
 	content: ".";
 	display: block;
@@ -112,7 +112,7 @@
 </style>
 <html>
 <head>
-<title>Sweet Recommender System</title>
+<title>{% trans "Sweet Recommender System" %}</title>
 <!--meta property="fb:app_id" content="199954626696783"/-->
 <script type="text/javascript">
 
@@ -132,8 +132,9 @@
 <div id="site">
 <div id="header">
     <div style="padding: 3px; margin-bottom: 10px;">
-        <h1>Sweet recommender system</h1>
-        Contribute to scientific project and find out which sweets you like.
+        <h1>{% trans "Sweet Recommender System" %}</h1>
+        {% trans "Contribute to scientific project and find out which sweets you like." %}
+        
     </div>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
     <script type="text/javascript" src="http://tablesorter.com/jquery.tablesorter.min.js"></script>
@@ -141,13 +142,13 @@
 
     <ul id="menu">
         {% load active %}
-        <li class="{% active request "^/$" %}"><a href="{% url about_us %}">About the project</a></li>
+        <li class="{% active request "^/$" %}"><a href="{% url about_us %}">{% trans "About the project" %}</a></li>
 
-        <li class="{% active request "^/srs/reviews/" %}"><a href="{% url product_reviews %}">Review</a></li>
-        <li class="{% active request "^/srs/results/" %}"><a style="font-weight: bold" href="{% url product_recommends %}">Recommendations!</a></li>
+        <li class="{% active request "/srs/reviews/$" %}"><a style="font-weight: bold" href="{% url product_reviews %}">{% trans "Review" %}</a></li>
+        <li class="{% active request "/srs/results/$" %}"><a href="{% url product_recommends %}">{% trans "Recommendations" %}!</a></li>
         <!--li class="{% active request "^/friends/" %}"><a href="">Friends' choices</a></li-->
-        <li class="{% active request "^/srs/add/" %}"><a href="{% url product_add %}">Provide some sweets</a></li>
-        <li class="{% active request "^/faq/" %}"><a href="{% url faq %}">FAQ</a></li>
+        <li class="{% active request "/srs/add/$" %}"><a href="{% url product_add %}">{% trans "Add sweets" %}</a></li>
+        <li class="{% active request "/faq/$" %}"><a href="{% url faq %}">{% trans "FAQ" %}</a></li>
 
 	{% comment %}
         {% if request.user.is_anonymous %}
@@ -161,10 +162,13 @@
             </form>
             </li>
         {% else %}
-            <li class="{% active request "^/logout/" %}"><a href="{% url social_logout %}">Logout</a></li>
+            <li class="{% active request "^/logout/" %}"><a href="{% url social_logout %}">{% trans "Logout" %}</a></li>
         {% endif %}
 	{% endcomment %}
     </ul>
+    <div style="padding: 3px; padding-top: 10px;">{% trans "Choose language" %}:<br />
+    <a href="/en/">English</a>
+    <a href="/pl/">Polski</a></div>
 </div>
 <div id="content-container">
     <div id="content">

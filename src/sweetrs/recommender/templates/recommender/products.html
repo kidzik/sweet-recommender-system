@@ -1,14 +1,14 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load i18n %}
 {% block content %}
-    <h2>Rate sweets</h2>
-    Please give a mark on the 1-5 scale where:
+    <h2>{% trans "Rate sweets" %}</h2>
+    {% trans "Please give a mark on the 1-5 scale where:" %}
     <ul>
-        <li>1 means very poor, "I don't like it",</li>
-        <li>5 means excelent, "I'm lovin' it".</li>
+        <li>{% trans "1 means very poor, I don't like it," %}</li>
+        <li>{% trans "5 means excelent, I'm lovin' it." %}</li>
     </ul>
-    If you haven't tried given product just mark it so.
-    Then the algorithm will know if it should be taken into account during recommendation process.
-    <h3>Progress <span id="rated">{{ rated }}</span> / <span id="all">{{ all }}</span> already rated</h3>
+    {% blocktrans %}If you haven't tried given product just mark it so.
+    Then the algorithm will know if it should be taken into account during recommendation process.{% endblocktrans %}
+    <h3>{% trans "Progress" %} <span id="rated">{{ rated }}</span> / <span id="all">{{ all }}</span> {% trans "already rated" %}</h3>
     <div class="clearfix">
     <div class="bar"><div id="bar" class="checked" style="width:{{ ratingbar }}px;"></div></div>
 
@@ -16,7 +16,7 @@
     {% for item in products %}
         {% include "include/product.html" %}
     {% empty %}
-        You have already rated all sweets. Thanks! Now you can check recommends!
+        {% trans "You have already rated all sweets. Thanks! Now you can check recommends!" %}
     {% endfor %}
     </div>
 
