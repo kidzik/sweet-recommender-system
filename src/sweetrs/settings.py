@@ -102,11 +102,6 @@ INSTALLED_APPS = (
     'sweetrs.localeurl',
 )
 
-try:
-    from localsettings import *
-except ImportError:
-    pass
-
 SOCIALREGISTRATION_GENERATE_USERNAME = True
 
 AUTHENTICATION_BACKENDS = (
@@ -116,3 +111,8 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_REDIRECT_URL = '/srs/reviews/'
 #AUTH_PROFILE_MODULE = 'socialregistration.FacebookProfile'
+
+try:
+    from sweetrs.localsettings import *
+except ImportError:
+    pass
