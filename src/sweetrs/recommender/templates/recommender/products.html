@@ -27,7 +27,7 @@ $("button").click(function () {
         s = $(this).attr('id').split("-");
         id = s[0];
         val = s[1];
-        $.post("/srs/rate/", { id: id, val: val },function(data) {
+        $.post("/en/srs/rate/", { id: id, val: val },function(data) {
             $("#items").append(data);
             updateButtons();
         });
