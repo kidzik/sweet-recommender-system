@@ -116,3 +116,8 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_REDIRECT_URL = '/srs/reviews/'
 #AUTH_PROFILE_MODULE = 'socialregistration.FacebookProfile'
+
+try:
+    from localsettings import *
+except ImportError:
+    pass
