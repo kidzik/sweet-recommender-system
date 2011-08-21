@@ -102,6 +102,11 @@ INSTALLED_APPS = (
     'sweetrs.localeurl',
 )
 
+try:
+    from localsettings import *
+except ImportError:
+    pass
+
 SOCIALREGISTRATION_GENERATE_USERNAME = True
 
 AUTHENTICATION_BACKENDS = (
