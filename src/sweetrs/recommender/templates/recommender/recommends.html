@@ -28,7 +28,6 @@
     }
     </style>
     {% load thumbnail %}
-    <h3>{% trans "Users" %}</h3>
     <!-- {% trans "Your tau correlation coefficients with other sweetrs users. I will give some details later, right now you can read something on <a href='http://en.wikipedia.org/wiki/Pearson_correlation'>wikipedia</a>." %}
     <table id="users">
     <thead>
@@ -62,10 +61,23 @@
         </form>
     </div>
     <div style="clear: both;"><br /></div> -->
+	<!-- AddThis Button BEGIN -->
+	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+	<a class="addthis_button_preferred_1"></a>
+	<a class="addthis_button_preferred_2"></a>
+	<a class="addthis_button_preferred_3"></a>
+	<a class="addthis_button_preferred_4"></a>
+	<a class="addthis_button_compact"></a>
+	<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e69007722666d90"></script>
+	<!-- AddThis Button END -->
     <h3>{% trans "Ratings" %}</h3>
     {% blocktrans %}Currently I predict rating as weighted sum of other users ratings, where weights are just correlation coefficients (normalized).
     More details will be shown later.<br />
     Red background is just for noticing big mistake made by algorithm i.e. if predicted value differates "too much" with your rank.{% endblocktrans %}
+    <br /><br />
+    <a href="http://students.mimuw.edu.pl/~lk234151/works/mgr-math-01.pdf">{% blocktrans %}You will have an impact on my master thesis! Read current version now and learn more!{% endblocktrans %}</a>
     <table id="products">
     <thead>
     <tr>
