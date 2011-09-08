@@ -240,7 +240,7 @@ def product_rate(request):
         product = products.order_by("?")[0]
     except:
         msg = _("You have already rated all sweets. Thanks! Now you can check recommends!")
-        return HttpResponse("<br /><a class=\"vbig\" href=\"/src/results/\">" + msg +"</a>")
+        return HttpResponse("<br /><a class=\"vbig\" href=\"/srs/results/\">" + msg +"</a>")
 
     return render_to_response('include/product.html',
         context_instance=RequestContext(request, {"item": product}))
