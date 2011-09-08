@@ -153,9 +153,6 @@ def product_recommends(request, template_path='recommender/recommends.html'):
     if request.user.email.split('@')[1] == "dummy.sweetrs.org":
         return redirect('product_recommends_provide_email')
  
-    return render_to_response("recommender/recommender.tmp.html",
-        context_instance=RequestContext(request, {}))
-    # find similar users:
     users = User.objects.all().exclude(id=request.user.id)[:10]
     v1 = get_ratings_vector(request.user)
 
