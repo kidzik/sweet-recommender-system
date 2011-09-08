@@ -108,12 +108,22 @@
         height: 20px;
         background-color: #339900;
     }
+    .vbig {
+    	font-size: 30px;
+    }
+    ul.logos {
+    list-style-type: none; padding-left: 0; margin-left: 0;
+    }
+    ul.logos li {
+    	padding-bottom: 10px;
+    }
+    
 
 </style>
 <html>
 <head>
 <title>{% trans "Sweet Recommender System" %}</title>
-<!--meta property="fb:app_id" content="199954626696783"/-->
+<meta property="fb:app_id" content="199954626696783">
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -132,7 +142,7 @@
 <div id="site">
 <div id="header">
     <div style="padding: 3px; margin-bottom: 10px;">
-        <h1>{% trans "Sweet Recommender System" %}</h1>
+        <a href="{% url about_us %}"><h1>{% trans "Sweet Recommender System" %}</h1></a>
         {% trans "Contribute to scientific project and find out which sweets you like." %}
         
     </div>
@@ -169,6 +179,13 @@
     <div style="padding: 3px; padding-top: 10px;">{% trans "Choose language" %}:<br />
     <a href="/en/">English</a>
     <a href="/pl/">Polski</a></div>
+    
+    <div style=" text-align: center; padding-top: 10px;">
+    	<ul class="logos">
+    	<li><a href="http://mimuw.edu.pl/"><img src="http://gender.i3.edu.pl/i3/images/logo/logo_UW_120px.jpg" /></a>
+    	<li><a href="https://github.com/kidzik/sweet-recommender-system/"><img width="75" height="32" src="http://www.saurus.info/public/github_logo.png" /></a></li>
+    	</ul>
+    </div>
 </div>
 <div id="content-container">
     <div id="content">

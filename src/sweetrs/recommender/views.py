@@ -13,6 +13,7 @@ from django.shortcuts import redirect
 from sweetrs.recommender.forms import AccessForm
 from sweetrs.recommender.forms import ProductForm
 from django.core.mail import send_mail
+from django.utils.translation import ugettext as _
 
 PRODUCTS_ON_SITE = 1
 
@@ -238,7 +239,8 @@ def product_rate(request):
         products = Product.objects.all().exclude(id__in = Rating.objects.filter(user=request.user).values_list('product__id', flat=True))
         product = products.order_by("?")[0]
     except:
-        return HttpResponse("You have already rated all sweets. Thanks! Now you can check recommends!")
+        msg = _("You have already rated all sweets. Thanks! Now you can check recommends!")
+        return HttpResponse("<br /><a class=\"vbig\" href=\"/src/results/\">" + msg +"</a>")
 
     return render_to_response('include/product.html',
         context_instance=RequestContext(request, {"item": product}))

@@ -16,7 +16,7 @@
     {% for item in products %}
         {% include "include/product.html" %}
     {% empty %}
-        {% trans "You have already rated all sweets. Thanks! Now you can check recommends!" %}
+        <a class="vbig" href="{% url product_recommends %}">{% trans "You have already rated all sweets. Thanks! Now you can check recommends!" %}</a>
     {% endfor %}
     </div>
 
