@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^add/$', 'sweetrs.recommender.views.product_add', {} ,'product_add'),
     (r'^rate/$', 'sweetrs.recommender.views.product_rate', {} ,'product_rate'),
     (r'^email/$', 'sweetrs.recommender.views.product_recommends_provide_email', {} ,'product_recommends_provide_email'),
+    (r'^results.csv$', 'sweetrs.recommender.views.export_csv', {} ,'export_csv'),
     
 #    (r'^canvas/$', 'sweetrs.recommender.views.facebook_intro', {}, 'facebook_intro'),
     (r'^canvas/$', 'sweetrs.recommender.views.product_reviews', {
