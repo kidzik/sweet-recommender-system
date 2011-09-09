@@ -3,7 +3,7 @@ import math
 import random
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
 from sweetrs.recommender.models import Product
@@ -245,5 +245,7 @@ def product_rate(request):
         context_instance=RequestContext(request, {"item": product}))
 
 def export_csv(request):
-    return render_to_response('recommender/export.csv',
-        context_instance=RequestContext(request, {"ratings": Rating.objects.all()}))
+    if request.user.is_superuser:
+        return render_to_response('recommender/export.csv',
+                                  context_instance=RequestContext(request, {"ratings": Rating.objects.all()}))
+    return HttpResponseForbidden
