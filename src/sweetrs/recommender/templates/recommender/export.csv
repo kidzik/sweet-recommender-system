@@ -1,0 +1,2 @@
+{% for rating in ratings %}{{ rating.user.id }},{{ rating.product.id }},{{ rating.value }}
+{% endfor %}

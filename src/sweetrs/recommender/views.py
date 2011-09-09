@@ -244,3 +244,6 @@ def product_rate(request):
     return render_to_response('include/product.html',
         context_instance=RequestContext(request, {"item": product}))
 
+def export_csv(request):
+    return render_to_response('recommender/export.csv',
+        context_instance=RequestContext(request, {"ratings": Rating.objects.all()}))
