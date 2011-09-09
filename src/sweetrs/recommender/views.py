@@ -244,8 +244,9 @@ def product_rate(request):
     return render_to_response('include/product.html',
         context_instance=RequestContext(request, {"item": product}))
 
+from sweetrs.decorators import superuser_only
+
+@superuser_only
 def export_csv(request):
-    if request.user.is_superuser:
-        return render_to_response('recommender/export.csv',
+    return render_to_response('recommender/export.csv',
                                   context_instance=RequestContext(request, {"ratings": Rating.objects.all()}))
-    return HttpResponseForbidden()
