@@ -8,11 +8,13 @@ __author__ = 'kidzik'
 
 def about(request):
     """ list products """
+    ratingsbar = Rating.objects.all().count() / 20
+    usersbar = User.objects.all().count()
     context = {
         'users': User.objects.all().count(),
         'ratings': Rating.objects.all().count(),
-        'usersbar': User.objects.all().count(),
-        'ratingsbar': Rating.objects.all().count() / 20,
+        'usersbar': 500 if usersbar > 500 else usersbar,
+        'ratingsbar': 500 if ratingsbar > 500 else ratingsbar,
     }
     return direct_to_template(request, 'flatpages/about.html', extra_context=context)
 
