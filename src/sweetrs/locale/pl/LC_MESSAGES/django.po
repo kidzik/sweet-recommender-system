@@ -261,8 +261,9 @@ msgstr "Czego potrzebuję?"
 #: templates/flatpages/about.html:24
 msgid ""
 "In order to build reliable system I need at least:<br />500 users and about "
-"10000 marks"
-msgstr "Aby zbudować wartościowy system potrzebuję co najmniej:<br />500 użytkowników i około 10000 ocen"
+"10000 marks. <strong>But of course the more the better!</strong>"
+msgstr "Aby zbudować wartościowy system potrzebuję co najmniej:<br />500 użytkowników i około 10000 ocen. "
+"<strong>Ale oczywiście im więcej tym lepiej!</strong>"
 
 #: templates/flatpages/about.html:26
 msgid "So far..."
